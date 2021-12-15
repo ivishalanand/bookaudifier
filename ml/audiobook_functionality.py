@@ -3,14 +3,15 @@ import re
 import urllib
 
 import pandas as pd
-import pytesseract
+import pyttsx3
 import requests
 from bs4 import BeautifulSoup
-from gtts import gTTS
-from pdf2image import convert_from_path
+from pdfminer import high_level
 from requests.structures import CaseInsensitiveDict
+import time
 
 HOME_DIR = os.getcwd()
+
 
 def remove_tags(text):
     TAG_RE = re.compile(r'<[^>]+>')
@@ -127,54 +128,37 @@ def create_audiobook(content):
     https://github.com/sayantanm19/js-music-player
     https://arimariojesus.github.io/myMusicPlayer/
     '''
-    tts = gTTS(content, lang='en', tld='com')
-    mp3_file_path = HOME_DIR + '/static/audiobook.mp3'
-    tts.save(mp3_file_path)
+    engine = pyttsx3.init()
+    start = time.time()
+    # engine.say(content)
+    engine.save_to_file(content, HOME_DIR + '/static/audiobook.mp3')
+    engine.runAndWait()
+    end = time.time()
+    print("Time taken for generating audiobook: {}s".format(end-start))
+
     return
 
 
 def get_text(PDF_file_name):
-    # Path of the pdf
-    directory = HOME_DIR + "/audiobook_assets/"
-    filePath = directory + PDF_file_name
-    doc = convert_from_path(filePath)
-
-    print("Generating Audiobook")
-    content = ""
-    for _, page_data in enumerate(doc):
-        if _ < 10:
-            continue
-        text = pytesseract.image_to_string(page_data)
-        content = content + text
-        content = content.replace('-\n', '').replace('\n', ' ').replace("|", "I")
-        if content == "":
-            continue
-        create_audiobook(content)
-        return
-
+    directory = HOME_DIR + "/audiobook_assets/" + PDF_file_name
+    start = time.time()
+    content = high_level.extract_text(directory)
+    end = time.time()
+    print("Time taken for generating text: {}s".format(end-start))
+    with open(HOME_DIR + '/audiobook_assets/book_content.txt', 'w') as f:
+        f.write(content)
     return content
 
 
 def delete_unnecessary_files():
     try:
-        files = [f.path for f in os.scandir("/images")]
-        img_files = [file for file in files if ".jpg" in file]
-        for img in img_files:
-            os.remove(img)
+        os.remove(HOME_DIR + "/audiobook_assets/book.pdf")
+        os.remove(HOME_DIR + "/static/audiobook.mp3")
+        os.remove(HOME_DIR + "/static/cover.jpeg")
+        os.remove(HOME_DIR + "/audiobook_assets/book_content.txt")
     except:
         pass
-    try:
-        os.remove("/audiobook_assets/book.pdf")
-    except:
-        pass
-    try:
-        os.remove("/static/audiobook.mp3")
-    except:
-        pass
-    try:
-        os.remove("/static/cover.jpeg")
-    except:
-        pass
+
 
 
 def get_book_pdf(pdf_link):
@@ -187,7 +171,10 @@ def get_book_pdf(pdf_link):
 
     download_link = get_download_link(download_soup)
     response = requests.get(download_link)
+    print("Downloading Book")
     save_book(HOME_DIR + "/audiobook_assets/book.pdf", response)
+    print("Extracting text")
     content = get_text("book.pdf")
-    # create_audiobook(content)
+    print("Converting to audiobook")
+    create_audiobook(content)
     return
