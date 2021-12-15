@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<div class="container">
+    <div>
+        <h1 class="text-center"> Bookaudiofier.ai</h1>
+    </div>
+    <form action="search" method="POST">
+        {% csrf_token %}
+        <input autofocus class="search-bar center-block" name="search" type="text" x-webkit-speech/>
+        <div class="search-nav ">
+            <div class="search-button">
+                <a href="#">
+                    <button class="center-block" type="submit">Search</button>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+    <h2 class="text-center"><u>Results</u></h2><br>
+    <!-- jinja2 Technique -->
+    {% if books_data %}
+    {% for data in books_data %}
+    <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <img alt="Card image cap" class="card-img-top" src="{{data.img_link}}">
+            <div class="card-body">
+                <h5 class="card-title text-center"><a href={{data.pdf_link}}>{{data.title}}</a></h5>
+                <p class="card-text">{{data.year}}</p>
+                <p class="card-text">Page Count: {{data.page_count}}</p>
+                <p class="card-text">Size: {{data.size}}</p>
+                <form action="{% url 'generate_audiobook' %}" method="GET">
+                    {% csrf_token %}
+                    <button class='btn btn-primary' name="book" type="submit" value={{data.pdf_link}}>Generate Audiobook</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+
+</div>
+
+
+</body>
+</html>
