@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 import json
 import os
-from ml.audiobook_functionality import fetch_books, get_book_pdf
+from ml.audiobook_functionality import fetch_books, get_audiobook
 
 
 def index(request):
@@ -22,5 +22,6 @@ def search(request):
 
 
 def generate_audiobook(request):
-    get_book_pdf(request.GET['book'])
-    return render(request, 'audiobookplayer.html')
+    content = get_audiobook(request.GET['book'])
+    context = {'content': content}
+    return render(request, 'speech_synthesizer.html', context)

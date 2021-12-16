@@ -161,7 +161,7 @@ def delete_unnecessary_files():
 
 
 
-def get_book_pdf(pdf_link):
+def get_audiobook(pdf_link):
     delete_unnecessary_files()
     pdf_link_resp = requests.get(pdf_link)
     download_soup = BeautifulSoup(pdf_link_resp.text, "html.parser")
@@ -175,6 +175,6 @@ def get_book_pdf(pdf_link):
     save_book(HOME_DIR + "/audiobook_assets/book.pdf", response)
     print("Extracting text")
     content = get_text("book.pdf")
-    print("Converting to audiobook")
-    create_audiobook(content)
-    return
+    # print("Converting to audiobook")
+    # create_audiobook(content)
+    return content
