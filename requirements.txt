@@ -160,3 +160,7 @@ six==1.16.0
 soupsieve==2.3.1
 sqlparse==0.4.2
 urllib3==1.26.7
+
+PyPDF2~=1.26.0
+torch~=1.10.1
+summarizer~=0.0.7

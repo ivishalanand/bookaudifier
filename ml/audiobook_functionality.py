@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from pdfminer import high_level
 from requests.structures import CaseInsensitiveDict
 import time
+import PyPDF2
 
 HOME_DIR = os.getcwd()
 
@@ -144,10 +145,13 @@ def get_text(PDF_file_name):
     start = time.time()
     content = high_level.extract_text(directory)
     end = time.time()
+
+    postprocessed_text = " ".join(content.replace("\n", " ").replace("\t", " ").split())
+
     print("Time taken for generating text: {}s".format(end-start))
     with open(HOME_DIR + '/audiobook_assets/book_content.txt', 'w') as f:
-        f.write(content)
-    return content
+        f.write(postprocessed_text)
+    return postprocessed_text
 
 
 def delete_unnecessary_files():
@@ -158,6 +162,23 @@ def delete_unnecessary_files():
         os.remove(HOME_DIR + "/audiobook_assets/book_content.txt")
     except:
         pass
+
+
+
+def extract_toc(reader):
+    def bookmark_dict(bookmark_list):
+        result = {}
+        for item in bookmark_list:
+            if isinstance(item, list):  # recursive call
+                result.update(bookmark_dict(item))
+            else:
+                try:
+                    result[reader.getDestinationPageNumber(item) + 1] = item.title
+                except:
+                    pass
+        return result
+
+    return bookmark_dict(reader.getOutlines())
 
 
 
@@ -174,7 +195,10 @@ def get_audiobook(pdf_link):
     print("Downloading Book")
     save_book(HOME_DIR + "/audiobook_assets/book.pdf", response)
     print("Extracting text")
-    content = get_text("book.pdf")
+    reader = PyPDF2.PdfFileReader(HOME_DIR + "/audiobook_assets/book.pdf")
+    toc = extract_toc(reader)
+    temp_toc = " ".join([i for i in toc.values()])# will have to remove this line
+    content = temp_toc # get_text("book.pdf")
     # print("Converting to audiobook")
     # create_audiobook(content)
     return content

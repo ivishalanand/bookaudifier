@@ -1,0 +1,89 @@
+.body {
+    font-family: 'Comfortaa', cursive;
+    font-size: 48px;
+    background-color: #f3f9fe;
+  }
+
+.login {
+  background-color: #643297;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 1px 1px 5px #643297;
+  font-family: 'Comfortaa', cursive;
+}
+
+
+.nav-item {
+  margin-left:20px;
+  margin-right:20px;
+  font-family: 'Comfortaa', cursive, bold;
+  font-weight:bold;
+  margin-top:10px;
+  margin-bottom:10px;
+  }
+
+.search {
+     height: 60px;
+     margin-left: 200px;
+     margin-right: 200px;
+}
+
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 1px 1px 5px #643297;
+    width: 50%;
+
+    }
+
+.search_input{
+    color: #643297;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 70%;
+    caret-color:transparent;
+    line-height: 40px;
+    padding: 0 10px 0 10px;
+    caret-color: #643297;
+    }
+
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:#643297;
+    text-decoration:none;
+    }
+
+.logo-name {
+    padding: 30px 30px;
+}
+
+.tagline {
+  text-align: center;
+  font-family: 'Source Code Pro', monospace;
+  font-size:50px
+  font-weight:bold;
+  margin: 10px 20px 30px 20px;
+}
+
+.sub-heading {
+  text-align: center;
+  color: #857a7a;
+  margin: 10px 30px 40px 30px;
+  font-color: gray;
+}
