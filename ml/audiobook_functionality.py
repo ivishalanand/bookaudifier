@@ -106,9 +106,8 @@ def fetch_books(query):
 def get_download_link(download_soup):
     download_base = 'https://www.pdfdrive.com/download.pdf?'
     security = download_soup.find("button", {"id": "previewButtonMain"})['data-preview'].replace("/ebook/preview?",
-                                                                                                 "").replace(
-        "session",
-        'h')
+                                                                                                 "").replace("session",
+                                                                                                             'h')
     tail = '&u=cache&ext=pdf'
 
     download_link = download_base + security + tail
@@ -135,7 +134,7 @@ def create_audiobook(content):
     engine.save_to_file(content, HOME_DIR + '/static/audiobook.mp3')
     engine.runAndWait()
     end = time.time()
-    print("Time taken for generating audiobook: {}s".format(end-start))
+    print("Time taken for generating audiobook: {}s".format(end - start))
 
     return
 
@@ -148,7 +147,7 @@ def get_text(PDF_file_name):
 
     postprocessed_text = " ".join(content.replace("\n", " ").replace("\t", " ").split())
 
-    print("Time taken for generating text: {}s".format(end-start))
+    print("Time taken for generating text: {}s".format(end - start))
     with open(HOME_DIR + '/audiobook_assets/book_content.txt', 'w') as f:
         f.write(postprocessed_text)
     return postprocessed_text
@@ -162,7 +161,6 @@ def delete_unnecessary_files():
         os.remove(HOME_DIR + "/audiobook_assets/book_content.txt")
     except:
         pass
-
 
 
 def extract_toc(reader):
@@ -181,7 +179,6 @@ def extract_toc(reader):
     return bookmark_dict(reader.getOutlines())
 
 
-
 def get_audiobook(pdf_link):
     delete_unnecessary_files()
     pdf_link_resp = requests.get(pdf_link)
@@ -197,8 +194,8 @@ def get_audiobook(pdf_link):
     print("Extracting text")
     reader = PyPDF2.PdfFileReader(HOME_DIR + "/audiobook_assets/book.pdf")
     toc = extract_toc(reader)
-    temp_toc = " ".join([i for i in toc.values()])# will have to remove this line
-    content = temp_toc # get_text("book.pdf")
+    temp_toc = " ".join([i for i in toc.values()])  # will have to remove this line
+    content = temp_toc  # get_text("book.pdf")
     # print("Converting to audiobook")
     # create_audiobook(content)
     return content
