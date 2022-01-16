@@ -9,7 +9,10 @@ from bs4 import BeautifulSoup
 from pdfminer import high_level
 from requests.structures import CaseInsensitiveDict
 import time
-import PyPDF2
+import unicodedata
+import fitz
+import readtime
+from search.models import TOC
 
 HOME_DIR = os.getcwd()
 
@@ -179,23 +182,55 @@ def extract_toc(reader):
     return bookmark_dict(reader.getOutlines())
 
 
+def get_text_between_pags(page_start, page_end, doc):
+    text = ""
+    for page in range(page_start, page_end):
+        text = text + doc.load_page(page).get_text()
+    cleaned_text = unicodedata.normalize("NFKD",text)
+    return cleaned_text
+
+
+def get_book_data(my_raw_data):
+    doc = fitz.open(stream=my_raw_data, filetype="pdf")
+    toc = doc.get_toc(False)
+    for index in range(len(toc)):
+        page_start = toc[index][3]['page']
+        if index + 1 < len(toc):
+            page_end = toc[index + 1][3]['page']
+        else:
+            page_end = doc.page_count
+        toc[index].append(get_text_between_pags(page_start, page_end, doc))
+
+    book_data = []
+    text = ""
+    total_reading_time = ""
+    for info in toc:
+        level = "          "*(info[0]-1)
+        read_time_int = readtime.of_text(info[4]).minutes
+        read_time_str = str(read_time_int) + " min"
+        book_data.append(TOC(info[1], info[4], level, read_time_str))
+        text = text + info[4]
+
+    total_time_to_read = readtime.of_text(text).minutes
+    if total_time_to_read > 60:
+        total_reading_time = "{:.2f}".format(total_time_to_read/60) + " hour"
+    else:
+        total_reading_time = str(total_time_to_read) + " mins"
+    print("total readin time :", total_reading_time)
+    return book_data, total_reading_time
+
+
 def get_audiobook(pdf_link):
     delete_unnecessary_files()
     pdf_link_resp = requests.get(pdf_link)
     download_soup = BeautifulSoup(pdf_link_resp.text, "html.parser")
     cover_pic_link = download_soup.find(class_='ebook-img')['src']
+    book_title = download_soup.find(class_='ebook-title').text
     urllib.request.urlretrieve(cover_pic_link,
                                HOME_DIR + "/static/cover.jpeg")
 
     download_link = get_download_link(download_soup)
     response = requests.get(download_link)
-    print("Downloading Book")
-    save_book(HOME_DIR + "/audiobook_assets/book.pdf", response)
-    print("Extracting text")
-    reader = PyPDF2.PdfFileReader(HOME_DIR + "/audiobook_assets/book.pdf")
-    toc = extract_toc(reader)
-    temp_toc = " ".join([i for i in toc.values()])  # will have to remove this line
-    content = temp_toc  # get_text("book.pdf")
-    # print("Converting to audiobook")
-    # create_audiobook(content)
-    return content
+    my_raw_data = response.content
+    book_data, total_reading_time = get_book_data(my_raw_data)
+    return book_data, total_reading_time, cover_pic_link, book_title

@@ -5,7 +5,6 @@ import json
 import os
 from ml.audiobook_functionality import fetch_books, get_audiobook
 
-
 def index(request):
     return render(request, 'index.html')
 
@@ -22,6 +21,9 @@ def search(request):
 
 
 def generate_audiobook(request):
-    content = get_audiobook(request.GET['book'])
-    context = {'content': content}
-    return render(request, 'speech_synthesizer.html', context)
+    book_data, total_reading_time, cover_pic_link, book_title = get_audiobook(request.GET['book'])
+    context = {'toc': book_data,
+               'cover_pic_link': cover_pic_link,
+               'total_reading_time': total_reading_time,
+               'book_title': book_title}
+    return render(request, 'playlist.html', context)

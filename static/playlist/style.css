@@ -1,0 +1,122 @@
+/* Font Family
+================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+
+/* Global Styles
+================================================== */
+
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    background-color: #fff;
+    color: #643297;
+    font-size: 1rem;
+    font-family: "Source Sans Pro", arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025rem;
+    line-height: 1.618;
+    padding: 1rem 0;
+}
+
+/* Setup
+================================================== */
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 15%;
+
+    max-width: 800px;
+    width: 100%;
+}
+.column {
+    width: inherit;
+}
+
+/* Typography / Links
+================================================== */
+
+p {
+    color: #643297;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0 0 2px;
+}
+
+a,
+a:visited {
+    color: #8cc3e6;
+    outline: 0;
+    text-decoration: underline;
+}
+a:hover,
+a:focus {
+    color: #bbdef5;
+}
+p a,
+p a:visited {
+    line-height: inherit;
+}
+
+/* Audio Player Styles
+================================================== */
+
+
+#plList li {
+    cursor: pointer;
+    display: block;
+    margin: 0;
+    padding: 5px 0;
+}
+
+#plList li:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#plwrap {
+    margin: 0 auto;
+}
+
+.plItem {
+    position: relative;
+    margin: 1%;
+
+}
+
+
+.plTitle {
+    display:block
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ;
+    padding-left: 21px;
+    width: 85%;
+}
+
+.plLength {
+    padding-left: 21px;
+    position: absolute;
+    right: 21px;
+    top: 0;
+}
+
+.plSel,
+.plSel:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #643297;
+    cursor: default !important;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 464px;
+  height: 640px;
+
+}
+
+
