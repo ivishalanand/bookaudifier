@@ -21,7 +21,7 @@ synth.onvoiceschanged = function() {
   for (i = 0; i < voices.length; i++) {
     var voice = voices[i];
     var option = document.createElement("option");
-    var textnode = document.createTextNode(voice.name);
+    var textnode = document.createTextNode(voice.name + ' [' + voice.lang + ']');
     option.appendChild(textnode);
     select.appendChild(option);
   }
