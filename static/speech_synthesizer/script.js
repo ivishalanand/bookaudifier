@@ -114,16 +114,15 @@ function play() {
     utterance.onboundary = function(event) {
       clearHighlight();
       var current = document.querySelectorAll("span[data-count='" + event.charIndex + "']")[0];
-      if (current) {
-        var percentage_finished = (event.charIndex + 1)/ documentLength * 100
-        var width = Math.min(percentage_finished, 100) + '%';
-        document.getElementById("seek-bar").style.width = width;
-        if (percentage_finished >= 100 ) {
-             document.getElementById("album-art-image").className = "";
-        }
-
-        current.classList.add("active");
+      var percentage_finished = (event.charIndex + 1)/ documentLength * 100
+      var width = Math.min(percentage_finished, 100) + '%';
+      document.getElementById("seek-bar").style.width = width;
+      if (percentage_finished >= 100 ) {
+           document.getElementById("album-art-image").className = "";
       }
+
+      current.classList.add("active");
+
       // var voice = document.getElementById("voiceSelect");
       // var index = voice.selectedIndex;
       // utterance.voice = voices[index];
@@ -181,11 +180,12 @@ function textChanged() {
   var editor = document.getElementById("text");
   var raw_text = editor.innerHTML.replace(/<[^>]*>/g, "");
   var tab_removed = raw_text.replace(/\t/g,' '); // removed \t
-  var new_line_removed = raw_text.replace(/\n/g,' '); // removed \n
+  var new_line_removed = tab_removed.replace(/\n/g,' '); // removed \n
+  var removed_special_char = new_line_removed.replace(/[^a-zA-Z0-9.,-: ]/g, "");
 
-  var text = new_line_removed.replace(/ +(?= )/g,''); //remove multiple spaces with single space
+  var text = removed_special_char.replace(/ +(?= )/g,''); //remove multiple spaces with single space
 
-
+  var text =  text.concat(" .");
   text = text.split(" ");
   var wrappedText = [];
   for (i = 0; i < text.length; i++) {

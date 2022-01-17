@@ -34,8 +34,8 @@
                     </li>
 
                     {% for content in toc %}
-                    <li>
-                        <div class="plItem" onclick="changeReadingText(this)">
+                    <li onclick="changeReadingText(this)">
+                        <div class="plItem">
                             <div class="plTitle">
                                 <pre> {{ content.level }} ▶️ {{ content.title }} </pre>
                             </div>
