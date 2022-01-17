@@ -34,8 +34,8 @@ var voices = synth.getVoices();
 */
 function play() {
   if(synth.paused) {
-   document.getElementById("play-pause").className = "fas fa-play";
-   document.getElementById("album-art-image").className = "";
+   document.getElementById("play-pause").className = "fas fa-pause";
+   document.getElementById("album-art-image").className = "rotate";
 
    synth.resume();
 
@@ -109,13 +109,13 @@ function play() {
     * The event arguments contain the charIndex property,
     * which is equal to the index of the first letter of the current word.
     */
-    var tag = document.getElementById('text');
-    var doucumentLength = tag.innerText.length
+    var wordCount = document.getElementsByClassName("words").length
+    var documentLength = parseInt(document.getElementsByClassName("words")[wordCount-1].dataset["count"])
     utterance.onboundary = function(event) {
       clearHighlight();
       var current = document.querySelectorAll("span[data-count='" + event.charIndex + "']")[0];
       if (current) {
-        var percentage_finished = (event.charIndex + 1)/ doucumentLength * 100
+        var percentage_finished = (event.charIndex + 1)/ documentLength * 100
         var width = Math.min(percentage_finished, 100) + '%';
         document.getElementById("seek-bar").style.width = width;
         if (percentage_finished >= 100 ) {
@@ -132,7 +132,7 @@ function play() {
       // synth.speak(utterance);
     }
 
-    utterance.onend = reset;
+//    utterance.onend = reset;
 
     /*
     * Be wary.
@@ -147,6 +147,7 @@ function play() {
 
 function reset() {
   document.getElementById("play-pause").className = "fas fa-play";
+  document.getElementById("album-art-image").className = "";
   synth.cancel();
   clearHighlight();
 }
@@ -178,13 +179,19 @@ function clearHighlight() {
 function textChanged() {
   var counter = 0;
   var editor = document.getElementById("text");
-  var text = editor.innerHTML.replace(/<[^>]*>/g, "");
+  var raw_text = editor.innerHTML.replace(/<[^>]*>/g, "");
+  var tab_removed = raw_text.replace(/\t/g,' '); // removed \t
+  var new_line_removed = raw_text.replace(/\n/g,' '); // removed \n
+
+  var text = new_line_removed.replace(/ +(?= )/g,''); //remove multiple spaces with single space
+
+
   text = text.split(" ");
   var wrappedText = [];
   for (i = 0; i < text.length; i++) {
     var word = text[i];
     var inc = word.length + 1;
-    word = "<span data-count='" + counter + "'>" + word + "</span>";
+    word = "<span data-count='" + counter + "' class='words'>" + word + "</span>";
     counter += inc;
     wrappedText.push(word);
   }
@@ -233,8 +240,6 @@ document.getElementById('voiceSelect').addEventListener('change', function() {
 function changeReadingText(el) {
   var text = el.textContent;
   document.getElementById("text").innerText = text;
-  document.getElementById("play-pause").className = "fas fa-pause";
-  synth.cancel();
-  clearHighlight();
+  reset()
   play()
 }
