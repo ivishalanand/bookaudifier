@@ -39,7 +39,7 @@
                             <div class="plTitle">
                                 <pre> {{ content.level }} ▶️ {{ content.title }} </pre>
                             </div>
-                            <div id="content" style="display:None;"> {{ content.content }}</div>
+                            <div id="content" style="display:None;">  <pre> {{ content.content }} </pre> </div>
                             <div class="plLength"> {{ content.read_time }}</div>
                         </div>
                     </li>
@@ -101,7 +101,7 @@
         <div class='flex-container' id="player-content">
             <div id="album-art">
                 <img class="" id="album-art-image"
-                     src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg">
+                     src="{{cover_pic_link}}">
             </div>
             <div id="player-controls">
                 <div class="control">

@@ -178,9 +178,9 @@ function clearHighlight() {
 function textChanged() {
   var counter = 0;
   var editor = document.getElementById("text");
-  var raw_text = editor.innerHTML.replace(/<[^>]*>/g, "");
-  var tab_removed = raw_text.replace(/\t/g,' '); // removed \t
-  var new_line_removed = tab_removed.replace(/\n/g,' '); // removed \n
+  var raw_text = editor.innerHTML.replace(/<[^>]*>/g, " ");
+  var tab_removed = raw_text.replace(/\t/g," "); // removed \t
+  var new_line_removed = tab_removed.replace(/\n/g," "); // removed \n
   var removed_special_char = new_line_removed.replace(/[^a-zA-Z0-9.,-: ]/g, "");
 
   var text = removed_special_char.replace(/ +(?= )/g,''); //remove multiple spaces with single space
