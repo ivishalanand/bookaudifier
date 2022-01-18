@@ -181,6 +181,7 @@ def get_text_between_pags(page_start, page_end, doc):
 
 
 def get_book_data(my_raw_data):
+    # TODO: handle things like 5nbspnbspnbspnbspnbspnbspnbspnbspnbsp in elon musk
     doc = fitz.open(stream=my_raw_data, filetype="pdf")
     toc = doc.get_toc(False)
     for index in range(len(toc)):
