@@ -11,10 +11,25 @@ def index(request):
 def search(request):
     if request.method == 'POST':
         search = request.POST['search']
-        df = fetch_books(search)
+        indx_pg = search.find("&page=")
+
+        #TODO: if the search page gives 0 result, or have gone to lets say 100 pages then should show a awww snap screen
+        # checking the page number of search query
+        if indx_pg >= 0:
+            current_pg_no = int(search[6 + indx_pg:])
+            search_query = search
+            search = search[:indx_pg]
+        else:
+            search_query = search
+            current_pg_no = 1
+
+        df = fetch_books(search_query)
         json_records = df.reset_index().to_json(orient='records')
         data = json.loads(json_records)
-        context = {'books_data': data}
+        context = {'books_data': data,
+                   'query': search,
+                   'current_pg_no': current_pg_no,
+                   }
         return render(request, 'search.html', context)
     else:
         return render(request, 'search.html')

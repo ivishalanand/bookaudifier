@@ -87,3 +87,25 @@ main {
 .book-card:hover .book-card__img {
   border-radius: 0%;
 }
+
+
+.next, .previous {
+  background-color: #643297;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 1px 1px 5px #643297;
+  font-family: 'Comfortaa', cursive;
+  margin: 0 10%;
+
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+}
