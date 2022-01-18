@@ -351,7 +351,7 @@ html, body {
     margin-left: 40px;
     transform: rotateZ(0);
     transition: 0.3s ease all;
-    box-shadow: 0 0 0 10px #fff;
+    box-shadow: 0 0 0 10px #d6bcf1;
     border-radius: 50%;
     overflow: hidden;
 }

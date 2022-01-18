@@ -35,7 +35,7 @@ var voices = synth.getVoices();
 function play() {
   if(synth.paused) {
    document.getElementById("play-pause").className = "fas fa-pause";
-   document.getElementById("album-art-image").className = "rotate";
+   document.getElementById("album-art").className = "rotate active";
 
    synth.resume();
 
@@ -45,13 +45,13 @@ function play() {
   if (synth.speaking & !synth.paused) {
     synth.pause();
     document.getElementById("play-pause").className = "fas fa-play";
-    document.getElementById("album-art-image").className = "";
+    document.getElementById("album-art").className = "";
 
   }
   else {
 
     document.getElementById("play-pause").className = "fas fa-pause";
-    document.getElementById("album-art-image").className = "rotate";
+    document.getElementById("album-art").className = "rotate active";
 
 
     textChanged();
@@ -112,13 +112,15 @@ function play() {
     var wordCount = document.getElementsByClassName("words").length
     var documentLength = parseInt(document.getElementsByClassName("words")[wordCount-1].dataset["count"])
     utterance.onboundary = function(event) {
+      console.log(event.charIndex, text.substring(event.charIndex, event.charIndex + event.charLength))
+
       clearHighlight();
       var current = document.querySelectorAll("span[data-count='" + event.charIndex + "']")[0];
       var percentage_finished = (event.charIndex + 1)/ documentLength * 100
       var width = Math.min(percentage_finished, 100) + '%';
       document.getElementById("seek-bar").style.width = width;
       if (percentage_finished >= 100 ) {
-           document.getElementById("album-art-image").className = "";
+           document.getElementById("album-art").className = "";
       }
 
       current.classList.add("active");
@@ -146,7 +148,7 @@ function play() {
 
 function reset() {
   document.getElementById("play-pause").className = "fas fa-play";
-  document.getElementById("album-art-image").className = "";
+  document.getElementById("album-art").className = "";
   synth.cancel();
   clearHighlight();
 }
@@ -181,11 +183,14 @@ function textChanged() {
   var raw_text = editor.innerHTML.replace(/<[^>]*>/g, " ");
   var tab_removed = raw_text.replace(/\t/g," "); // removed \t
   var new_line_removed = tab_removed.replace(/\n/g," "); // removed \n
-  var removed_special_char = new_line_removed.replace(/[^a-zA-Z0-9.,-: ]/g, "");
+  var removed_special_char = new_line_removed.replace(/[^a-zA-Z0-9.,-:^ ]/g, "");
 
   var text = removed_special_char.replace(/ +(?= )/g,''); //remove multiple spaces with single space
 
-  var text =  text.concat(" .");
+  // making sure that the seek bar finishes till the end of the seek  and preventing multiple '.' at the end
+  if (text.substring(text.length-2,text.length-1) != ".") {
+      var text =  text.concat(".");
+  }
   text = text.split(" ");
   var wrappedText = [];
   for (i = 0; i < text.length; i++) {
@@ -243,3 +248,14 @@ function changeReadingText(el) {
   reset()
   play()
 }
+
+
+//code for getting the percentage completion of the text from seek bar
+var bar = document.getElementById("s-area");
+
+function clickBar(event){
+    var x = event.pageX - bar.offsetLeft;
+    console.log((100*x)/bar.offsetWidth)
+}
+bar.addEventListener("click", clickBar, false);
+

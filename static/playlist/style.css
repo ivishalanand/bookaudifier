@@ -116,6 +116,8 @@ p a:visited {
   margin-right: auto;
   width: 464px;
   height: 640px;
+  border-radius: 5%;
+  box-shadow: 10px 15px 20px rgb(0 0 0 / 55%);
 
 }
 

@@ -64,9 +64,10 @@
             <div class="row justify-content-center row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
                 {% if books_data %}
                 {% for data in books_data %}
-                <form action="{% url 'generate_audiobook' %}" method="GET">
+                <form action="{% url 'generate_audiobook' %}" id='generate-audiobook' method="GET" class="book-wrap">
                     {% csrf_token %}
-                    <div>
+                    <input name="book" type="hidden" value={{data.pdf_link}}>
+                    <div onclick="document.getElementById('generate-audiobook').submit();" style="cursor: pointer">
                         <div class="col mt-4">
                             <div class="book-card">
                                 <div class="book-card__cover">
@@ -81,11 +82,6 @@
                             </div>
                         </div>
                     </div>
-                    <button class='btn btn-primary' name="book" type="submit"
-                            value={{data.pdf_link}}>
-                        Generate Audiobook
-                    </button>
-
                 </form>
                 {% endfor %}
                 {% endif %}
@@ -94,35 +90,6 @@
     </div>
 </main>
 
-
-<!--<div class="container">-->
-<!--    <h2 class="text-center"><u>Results</u></h2><br>-->
-<!--    &lt;!&ndash; jinja2 Technique &ndash;&gt;-->
-<!--    {% if books_data %}-->
-<!--    {% for data in books_data %}-->
-<!--    <div class="col-md-3">-->
-<!--        <div class="card" style="width: 18rem;">-->
-<!--            <img alt="Card image cap" class="card-img-top" src="{{data.img_link}}">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title text-center"><a href={{data.pdf_link}}>{{data.title}}</a></h5>-->
-<!--                <p class="card-text">{{data.year}}</p>-->
-<!--                <p class="card-text">Page Count: {{data.page_count}}</p>-->
-<!--                <p class="card-text">Size: {{data.size}}</p>-->
-<!--                <form action="{% url 'generate_audiobook' %}" method="GET">-->
-<!--                    {% csrf_token %}-->
-<!--                    <button class='btn btn-primary' name="book" type="submit" value={{data.pdf_link}}>Generate-->
-<!--                        Audiobook-->
-<!--                    </button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <br>-->
-
-<!--    </div>-->
-<!--    {% endfor %}-->
-<!--    {% endif %}-->
 
 </body>
 </html>
