@@ -156,16 +156,6 @@ def get_text(PDF_file_name):
     return postprocessed_text
 
 
-def delete_unnecessary_files():
-    try:
-        os.remove(HOME_DIR + "/audiobook_assets/book.pdf")
-        os.remove(HOME_DIR + "/static/audiobook.mp3")
-        os.remove(HOME_DIR + "/static/cover.jpeg")
-        os.remove(HOME_DIR + "/audiobook_assets/book_content.txt")
-    except:
-        pass
-
-
 def extract_toc(reader):
     def bookmark_dict(bookmark_list):
         result = {}
@@ -221,14 +211,10 @@ def get_book_data(my_raw_data):
 
 
 def get_audiobook(pdf_link):
-    delete_unnecessary_files()
     pdf_link_resp = requests.get(pdf_link)
     download_soup = BeautifulSoup(pdf_link_resp.text, "html.parser")
     cover_pic_link = download_soup.find(class_='ebook-img')['src']
     book_title = download_soup.find(class_='ebook-title').text
-    urllib.request.urlretrieve(cover_pic_link,
-                               HOME_DIR + "/static/cover.jpeg")
-
     download_link = get_download_link(download_soup)
     response = requests.get(download_link)
     my_raw_data = response.content
