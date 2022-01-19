@@ -10,14 +10,15 @@ document.getElementById("next-click").addEventListener("click", function () {
 
 document.getElementById("prev-click").addEventListener("click", function () {
     var queryPartial = document.getElementById("prev-click").value
-    var nextPage = parseInt(document.getElementById("page-number").innerHTML) - 1
-    var nextPageQuery = queryPartial.concat(nextPage)
-    document.getElementById("prev-click").value = nextPageQuery
+    var prevPage = parseInt(document.getElementById("page-number").innerHTML) - 1
+    var prevPageQuery = queryPartial.concat(prevPage)
+    document.getElementById("prev-click").value = prevPageQuery
     form.submit();
 });
 
 if (parseInt(document.getElementById("page-number").innerHTML)==1) {
     document.getElementById("prev-click").style.display = 'none'
+    document.getElementsByClassName("page-no")[0].style.display =  "none"
   }
 
 

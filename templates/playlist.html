@@ -43,34 +43,36 @@
     </div>
     <div class="column add-bottom">
         <div id="mainwrap">
-            <div>
-                <img alt="{{cover_pic_link}}" class="center" src="{{cover_pic_link}}">
-            </div>
-            <div id="plwrap">
-                <ul id="plList">
-                    <li>
-                        <div class="plItem">
-                            <div class="plTitle">
-                                <pre>  <b>	{{book_title}} </b>	  </pre>
+            <div class="cover-playlist">
+                <div>
+                    <img alt="{{cover_pic_link}}" class="center" src="{{cover_pic_link}}">
+                </div>
+                <div id="plwrap">
+                    <ul id="plList">
+                        <li>
+                            <div class="plItem">
+                                <div class="plTitle">
+                                    <pre>  <b>	{{book_title}} </b>	  </pre>
+                                </div>
+                                <div class="plLength"> {{ total_reading_time }}</div>
                             </div>
-                            <div class="plLength"> {{ total_reading_time }}</div>
-                        </div>
-                    </li>
+                        </li>
 
-                    {% for content in toc %}
-                    <li onclick="changeReadingText(this)">
-                        <div class="plItem">
-                            <div class="plTitle">
-                                <pre> {{ content.level }} ▶️ {{ content.title }} </pre>
+                        {% for content in toc %}
+                        <li onclick="changeReadingText(this)">
+                            <div class="plItem">
+                                <div class="plTitle">
+                                    <pre> {{ content.level }} ▶️ {{ content.title }} </pre>
+                                </div>
+                                <div id="content" style="display:None;">
+                                    <pre> {{ content.content }} </pre>
+                                </div>
+                                <div class="plLength"> {{ content.read_time }}</div>
                             </div>
-                            <div id="content" style="display:None;">
-                                <pre> {{ content.content }} </pre>
-                            </div>
-                            <div class="plLength"> {{ content.read_time }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
 
             <div id="wrapper">

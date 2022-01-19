@@ -107,11 +107,11 @@
         <button class="previous rounded-pill" id="prev-click" name="search"
                 value="{{query}}&page="> prev
         </button>
+        <p id="page-number">{{current_pg_no}}</p>
         <button class="next rounded-pill" id="next-click" name="search"
                 value="{{query}}&page="> next
         </button>
     </form>
-    <p id="page-number" style="display:none" type="hidden">{{current_pg_no}}</p>
 </div>
 <script src="{%  static  'search/script.js'  %}"></script>
 </body>

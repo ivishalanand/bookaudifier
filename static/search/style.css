@@ -232,3 +232,10 @@ main {
   visibility:visible;
   }
 }
+
+#page-number {
+    font-family: 'Comfortaa', cursive;
+    color: #643297;
+    margin: 10px;
+    font-weight: bold;
+}
