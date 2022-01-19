@@ -51,8 +51,12 @@ def get_info(rows, i):
         hits = rows[i].find(class_='file-info').find(class_='fi-hit').text
     except:
         hits = ''
+    try:
+        book_id = rows[i].find('a').get('data-id')
+    except:
+        book_id = ''
 
-    return pdf_link, img_link, title, year, page_count, size, hits
+    return pdf_link, img_link, title, year, page_count, size, hits, book_id
 
 
 def get_headers():
@@ -76,17 +80,18 @@ def get_headers():
 
 
 def get_results(rows):
-    results = pd.DataFrame(columns=['title', 'pdf_link', 'img_link', 'year', 'page_count', 'size', 'hits'])
+    results = pd.DataFrame(columns=['title', 'pdf_link', 'img_link', 'year', 'page_count', 'size', 'hits', 'book_id'])
 
     for i in range(len(rows)):
-        pdf_link, img_link, title, year, page_count, size, hits = get_info(rows, i)
+        pdf_link, img_link, title, year, page_count, size, hits, book_id = get_info(rows, i)
         data = {'title': title,
                 'pdf_link': pdf_link,
                 'img_link': img_link,
                 'year': year,
                 'page_count': page_count,
                 'size': size,
-                'hits': hits}
+                'hits': hits,
+                'book_id': book_id}
         results = results.append(data, ignore_index=True)
     return results
 
@@ -207,7 +212,7 @@ def get_book_data(my_raw_data):
         total_reading_time = "{:.2f}".format(total_time_to_read/60) + " hour"
     else:
         total_reading_time = str(total_time_to_read) + " mins"
-    print("total readin time :", total_reading_time)
+    # print("total readin time :", total_reading_time)
     return book_data, total_reading_time
 
 
