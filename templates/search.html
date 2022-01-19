@@ -61,6 +61,13 @@
 <div class="showing-results-text">
     Showing results for &nbsp <b> "{{ query }}"</b>
 </div>
+<div class="overlay">
+    <div class="loading">Generating Audiobook</div>
+    <div class="loading-mobile">Generating Audiobook</div>
+    <div class="lds-dual-ring"></div>
+</div>
+
+</div>
 
 <main>
     <div>
@@ -72,7 +79,7 @@
                       method="GET">
                     {% csrf_token %}
                     <input name="book" type="hidden" value={{data.pdf_link}}>
-                    <div onclick="document.getElementById({{data.book_id}}).submit();" style="cursor: pointer">
+                    <div onclick="generateAudiobook({{data.book_id}});" style="cursor: pointer">
                         <div class="col mt-4">
                             <div class="book-card">
                                 <div class="book-card__cover">
@@ -106,6 +113,6 @@
     </form>
     <p id="page-number" style="display:none" type="hidden">{{current_pg_no}}</p>
 </div>
-<script src="{%  static  'pagination/pagination.js'  %}"></script>
+<script src="{%  static  'search/script.js'  %}"></script>
 </body>
 </html>

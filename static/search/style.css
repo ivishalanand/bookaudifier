@@ -119,3 +119,116 @@ main {
     color: #643297;
 
 }
+
+.loading {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    margin: 5% 35%;
+    font-family: 'Comfortaa', cursive;
+    color: #fff;
+    padding: 150px 10% 5% 10%;
+    border-radius: 15%;
+    z-index: 10;
+    width: 100px;
+    height: 250px;
+    background-color: #bb91eb;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display:none;
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.lds-dual-ring {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    margin: 5% 35%;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+    color: #643297;
+    border-radius: 15%;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 6%;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+}
+
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.loading-mobile{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    margin: 5% 35%;
+    font-family: 'Comfortaa', cursive;
+    color: #fff;
+    padding: 100px 10% 5% 10%;
+    border-radius: 15%;
+    z-index: 10;
+    width: 150px;
+    height: 200px;
+    background-color: #bb91eb;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+@media screen and (max-width : 1920px){
+  .loading-mobile{
+  visibility:hidden;
+  }
+}
+@media screen and (max-width : 906px){
+ .loading{
+  visibility:hidden;
+  }
+ .loading-mobile{
+  visibility:visible;
+  }
+}
