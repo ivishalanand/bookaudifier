@@ -109,3 +109,13 @@ main {
     justify-content: center;
     padding: 5%;
 }
+
+.showing-results-text {
+    display: flex;
+    justify-content: center;
+    padding: 5% 0 0 0;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+    color: #643297;
+
+}
