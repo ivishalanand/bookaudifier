@@ -7,16 +7,15 @@
 
 html,
 body {
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
     background-color: #fff;
     color: #643297;
     font-size: 1rem;
-    font-family: "Source Sans Pro", arial, sans-serif;
     font-weight: 400;
     letter-spacing: 0.025rem;
     line-height: 1.618;
     padding: 1rem 0;
+    max-width: 100%;
+
 }
 
 /* Setup
@@ -72,27 +71,30 @@ p a:visited {
 }
 
 #plList li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #d5bdec;
+    border-radius: 10px;
 }
 
 #plwrap {
-    margin: 0 auto;
+    margin: 0 5%;
 }
 
 .plItem {
     position: relative;
-    margin: 1%;
-
+    padding-top: 7px;
+    margin-bottom: -10px;
 }
 
 
 .plTitle {
     display:block
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ;
-    padding-left: 21px;
     width: 85%;
+    font-family: 'Comfortaa', cursive;
+    padding-right: 30px;
+    padding-left: 15px;
+    display: flex;
+
 }
 
 .plLength {
@@ -121,4 +123,62 @@ p a:visited {
 
 }
 
+.book-and-toc {
+    display: flex;
+    padding-top: 2%;
+}
 
+.book-and-toc-mobile {
+    display: inline-block;
+}
+
+.book-card .book-card__cover {
+  position: relative;
+  width: 333px;
+  height: 500px;
+  margin: 0 auto 8px auto;
+  perspective: 1000px;
+}
+
+
+.book {
+width:30%;
+display:center;
+margin-right: 200px;
+}
+
+.toc {
+    width:70%;
+    margin-right: 10%;
+    height: 600px;
+    overflow-y: scroll;
+    }
+
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #643297;
+  -webkit-box-shadow: 0 0 1px 643297
+}
+
+
+
+@media screen and (max-width : 1920px){
+  .book-and-toc-mobile{
+  visibility:hidden;
+  }
+}
+@media screen and (max-width : 906px){
+ .book-and-toc{
+  visibility:hidden;
+  }
+ .book-and-toc-mobile{
+  visibility:visible;
+  }
+}

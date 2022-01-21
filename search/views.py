@@ -41,4 +41,4 @@ def generate_audiobook(request):
                'cover_pic_link': cover_pic_link,
                'total_reading_time': total_reading_time,
                'book_title': book_title}
-    return render(request, 'playlist.html', context)
+    return render(request, 'audiobook.html', context)

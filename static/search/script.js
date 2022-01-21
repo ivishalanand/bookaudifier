@@ -18,7 +18,7 @@ document.getElementById("prev-click").addEventListener("click", function () {
 
 if (parseInt(document.getElementById("page-number").innerHTML)==1) {
     document.getElementById("prev-click").style.display = 'none'
-    document.getElementsByClassName("page-no")[0].style.display =  "none"
+    document.getElementById("page-number").style.display =  "none"
   }
 
 
