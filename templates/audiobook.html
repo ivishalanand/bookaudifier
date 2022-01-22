@@ -10,91 +10,137 @@
     <link href="{%  static  'css/index.css'  %}" rel="stylesheet">
     <link href="{%  static  'search/style.css'  %}" rel="stylesheet">
     <link href="{%  static  'audiobook/style.css'  %}" rel="stylesheet">
+    <link href="{%  static  'speech_synthesizer/style.css'  %}" rel="stylesheet">
 
 </head>
 
 <body>
-<div class="m-4">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid" style="padding-left:2.5%; padding-right:2.5%;">
-            <a class="navbar-brand" href="#">
-                <img alt="bookaudifier" height="60px" src="{% static 'logo_image.png' %}">
-            </a>
-            <button class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link text-center active" href="#">Home</a>
-                    <a class="nav-item nav-link text-center" href="#">Dashboard</a>
-                    <a class="nav-item nav-link text-center" href="#">My Bookshelf</a>
-                    <!--                    <a class="nav-item nav-link text-center" href="#">Genres</a>-->
+<div class="top">
+        <div class="m-4">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid" style="padding-left:2.5%; padding-right:2.5%;">
+                    <a class="navbar-brand" href="#">
+                        <img alt="bookaudifier" height="60px" src="{% static 'logo_image.png' %}">
+                    </a>
+                    <button class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse"
+                            type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link text-center active" href="#">Home</a>
+                            <a class="nav-item nav-link text-center" href="#">Dashboard</a>
+                            <a class="nav-item nav-link text-center" href="#">My Bookshelf</a>
+                            <!--                    <a class="nav-item nav-link text-center" href="#">Genres</a>-->
+                        </div>
+                        <div class="navbar-nav ms-auto">
+                            <button class="login rounded-pill">Login</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="navbar-nav ms-auto">
-                    <button class="login rounded-pill">Login</button>
-                </div>
-            </div>
+            </nav>
         </div>
-    </nav>
-</div>
-<!--div for book and TOC-->
-<div class="book-and-toc">
-    <div class="book">
-        <div class="container-fluid justify-content-center mb-4">
-            <div class="row justify-content-center row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
-                <div>
-                    <div class="col mt-4">
-                        <div class="book-card">
-                            <div class="book-card__cover">
-                                <div class="book-card__book">
-                                    <div class="book-card__book-front">
-                                        <img class="book-card__img"
-                                             src="{{cover_pic_link}}">
+        <!--div for book and TOC-->
+        <div class="book-and-toc">
+            <div class="book">
+                <div class="container-fluid justify-content-center mb-4">
+                    <div class="row justify-content-center row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
+                        <div>
+                            <div class="col mt-4">
+                                <div class="book-card">
+                                    <div class="book-card__cover">
+                                        <div class="book-card__book">
+                                            <div class="book-card__book-front">
+                                                <img class="book-card__img"
+                                                     src="{{cover_pic_link}}">
+                                            </div>
+                                            <div class="book-card__book-back"></div>
+                                            <div class="book-card__book-side"></div>
+                                        </div>
                                     </div>
-                                    <div class="book-card__book-back"></div>
-                                    <div class="book-card__book-side"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="toc">
-        <div id="plwrap">
-            <ul id="plList">
-                <li>
-                    <div class="plItem">
-                        <div class="plTitle">
-                            <b> {{book_title}} </b>
-                        </div>
-                        <div class="plLength"> {{ total_reading_time }}</div>
-                    </div>
-                </li>
-                {% for content in toc %}
-                <li onclick="changeReadingText(this)">
-                    <div class="plItem">
-                        <div class="plTitle">
-                           <pre>{{ content.level }}</pre>
-                            <div>
-                                <img alt="play" height="17px" src="{% static 'logo_image.png' %}">
+            <div class="toc">
+                <div id="plwrap">
+                    <ul id="plList">
+                        <li>
+                            <div class="plItem">
+                                <div class="heading plTitle" style="font-weight: 700;">
+                                    <b> {{book_title}} </b>
+                                </div>
+                                <div class="heading plLength" style="font-weight: 700;"> {{ total_reading_time }}</div>
                             </div>
-                            <pre> </pre>
-                            {{ content.title }}
-                        </div>
-                        <div id="content" style="display:None;">
-                            <pre> {{ content.content }} </pre>
-                        </div>
-                        <div class="plLength"> {{ content.read_time }}</div>
+                        </li>
+                        {% for content in toc %}
+                        <li onclick="changeReadingText(this)">
+                            <div class="plItem">
+                                <div class="plTitle">
+                                    <pre>{{ content.level }}</pre>
+                                    <div>
+                                        <img alt="play" height="17px" src="{% static 'logo_image.png' %}">
+                                    </div>
+                                    <pre> </pre>
+                                    {{ content.title }}
+                                </div>
+                                <div id="content" style="display:None;">
+                                    <pre> {{ content.content }} </pre>
+                                </div>
+                                <div class="plLength"> {{ content.read_time }}</div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="app-cover">
+            <div id="player">
+                <div class="active" id="player-track">
+                    <div id="album-name"></div>
+                    <div id="track-name"></div>
+                    <div id="track-time">
+                        <div id="current-time"></div>
+                        <div id="track-length"></div>
                     </div>
-                </li>
-                {% endfor %}
-            </ul>
+                    <div id="s-area">
+                        <div id="ins-time"></div>
+                        <div id="s-hover"></div>
+                        <div id="seek-bar"></div>
+                    </div>
+                </div>
+                <div class='flex-container' id="player-content">
+                    <div id="album-art">
+                        <img class="" id="album-art-image"
+                             src="{{cover_pic_link}}">
+                    </div>
+                    <div id="player-controls">
+                        <div class="control">
+                            <div class="button" id="play-previous">
+                                <i class="fas fa-backward"></i>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <div class="button" id="play-pause-button" onclick="play()">
+                                <i class="fas fa-play" id="play-pause"></i>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <div class="button" id="play-next">
+                                <i class="fas fa-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="{%  static  'speech_synthesizer/script.js'  %}"></script>
 </div>
 
-
 </body>
+</html>
 

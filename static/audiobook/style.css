@@ -142,15 +142,26 @@ p a:visited {
 
 
 .book {
-width:30%;
-display:center;
-margin-right: 200px;
+    width:30%;
+    display:center;
+    margin-right: 200px;
+}
+
+.heading {
+    text-align: center;
+    padding-bottom: 30px;
+    text
+
+}
+
+pre {
+    overflow: hidden;
 }
 
 .toc {
     width:70%;
     margin-right: 10%;
-    height: 600px;
+    height: 550px;
     overflow-y: scroll;
     }
 
@@ -181,4 +192,13 @@ margin-right: 200px;
  .book-and-toc-mobile{
   visibility:visible;
   }
+}
+
+.top {
+    display: inline-block;
+    width:inherit;
+}
+
+.audiobook {
+
 }

@@ -216,7 +216,7 @@ def get_book_data(my_raw_data):
     return book_data, total_reading_time
 
 
-    def get_audiobook(pdf_link):
+def get_audiobook(pdf_link):
     pdf_link_resp = requests.get(pdf_link)
     download_soup = BeautifulSoup(pdf_link_resp.text, "html.parser")
     cover_pic_link = download_soup.find(class_='ebook-img')['src']
