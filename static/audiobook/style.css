@@ -197,6 +197,8 @@ pre {
 .top {
     display: inline-block;
     width:inherit;
+    margin-top: -30px;
+;
 }
 
 .audiobook {
