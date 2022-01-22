@@ -12,9 +12,9 @@ def search(request):
     if request.method == 'POST':
         search = request.POST['search']
         indx_pg = search.find("&page=")
-
+        #TODO: search/page number should also work
+        #TODO: Only show results whose TOC is present
         #TODO: if the search page gives 0 result, or have gone to lets say 100 pages then should show a awww snap screen
-        # checking the page number of search query
         if indx_pg >= 0:
             current_pg_no = int(search[6 + indx_pg:])
             search_query = search

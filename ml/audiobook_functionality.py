@@ -1,7 +1,5 @@
 import os
 import re
-import urllib
-
 import pandas as pd
 import pyttsx3
 import requests
@@ -13,6 +11,11 @@ import unicodedata
 import fitz
 import readtime
 from search.models import TOC
+import urllib
+from requests import get
+from io import BytesIO
+from PIL import Image
+
 
 HOME_DIR = os.getcwd()
 
@@ -20,6 +23,10 @@ HOME_DIR = os.getcwd()
 def remove_tags(text):
     TAG_RE = re.compile(r'<[^>]+>')
     return TAG_RE.sub('', text)
+
+
+def resolve(url):
+    return urllib.request.urlopen(url).geturl()
 
 
 def get_info(rows, i):
@@ -30,7 +37,7 @@ def get_info(rows, i):
     try:
         img_link = rows[i].find(class_='file-left').find('img')['src'].replace('-s', "")
     except:
-        img_link = HOME_DIR + "/default_cover.jpeg"
+        img_link = "https://drive.google.com/file/d/1qcKLYPMh8RhA4_3ta1oiXLIOrYLlaBz5/view?usp=sharing"
     try:
         title = remove_tags(str(rows[i].find(class_='file-right').find('h2')))
     except:
@@ -79,6 +86,15 @@ def get_headers():
     return headers
 
 
+def no_cover_available_update(row):
+    img_link = row['img_link']
+    image_raw = get(img_link)
+    image = Image.open(BytesIO(image_raw.content))
+    if image.width == 210:
+        return "https://i.imgur.com/BxgcRaS.jpeg"
+    return img_link
+
+
 def get_results(rows):
     results = pd.DataFrame(columns=['title', 'pdf_link', 'img_link', 'year', 'page_count', 'size', 'hits', 'book_id'])
 
@@ -93,6 +109,7 @@ def get_results(rows):
                 'hits': hits,
                 'book_id': book_id}
         results = results.append(data, ignore_index=True)
+        # results['img_link'] = results.apply(lambda x: no_cover_available_update(x), axis=1)
     return results
 
 
