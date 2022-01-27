@@ -238,8 +238,9 @@ def get_audiobook(pdf_link):
     download_soup = BeautifulSoup(pdf_link_resp.text, "html.parser")
     cover_pic_link = download_soup.find(class_='ebook-img')['src']
     book_title = download_soup.find(class_='ebook-title').text
+    book_author = " ".join(download_soup.find(class_='ebook-author').text.replace("\n", "").split(" ")[1:])
     download_link = get_download_link(download_soup)
     response = requests.get(download_link)
     my_raw_data = response.content
     book_data, total_reading_time = get_book_data(my_raw_data)
-    return book_data, total_reading_time, cover_pic_link, book_title
+    return book_data, total_reading_time, cover_pic_link, book_title, book_author

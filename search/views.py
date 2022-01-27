@@ -36,9 +36,10 @@ def search(request):
 
 
 def generate_audiobook(request):
-    book_data, total_reading_time, cover_pic_link, book_title = get_audiobook(request.GET['book'])
+    book_data, total_reading_time, cover_pic_link, book_title, book_author = get_audiobook(request.GET['book'])
     context = {'toc': book_data,
                'cover_pic_link': cover_pic_link,
                'total_reading_time': total_reading_time,
-               'book_title': book_title}
+               'book_title': book_title,
+               'book_author': book_author}
     return render(request, 'audiobook.html', context)

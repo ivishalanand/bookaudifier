@@ -64,36 +64,42 @@
                 </div>
             </div>
         </div>
-        <div class="toc">
-            <div id="plwrap">
-                <ul id="plList">
-                    <li>
-                        <div class="plItem">
-                            <div class="heading plTitle" style="font-weight: 700;">
-                                <b> {{book_title}} </b>
-                            </div>
-                            <div class="heading plLength" style="font-weight: 700;"> {{ total_reading_time }}</div>
-                        </div>
-                    </li>
-                    {% for content in toc %}
-                    <li onclick="changeReadingText(this)">
-                        <div class="plItem">
-                            <div class="plTitle">
-                                <pre>{{ content.level }}</pre>
-                                <div>
-                                    <img alt="play" height="17px" src="{% static 'logo_image.png' %}">
+        <div class="book-info">
+            <div class="heading">
+                <div class="" style="font-weight: 700;">
+                    <b> {{book_title}} </b>
+                </div>
+                <div class="" style="pading-left: 10%"> {{ total_reading_time }}</div>
+            </div>
+            <div class="author">
+                <b> {{book_author}} </b>
+            </div>
+            <div class="contents">
+                <b> Table of contents </b>
+            </div>
+            <div class="toc">
+                <div id="plwrap">
+                    <ul id="plList">
+                        {% for content in toc %}
+                        <li onclick="changeReadingText(this)">
+                            <div class="plItem">
+                                <div class="plTitle">
+                                    <pre>{{ content.level }}</pre>
+                                    <div>
+                                        <img alt="play" height="17px" src="{% static 'logo_image.png' %}">
+                                    </div>
+                                    <pre> </pre>
+                                    {{ content.title }}
                                 </div>
-                                <pre> </pre>
-                                {{ content.title }}
+                                <div id="content" style="display:None;">
+                                    <pre> {{ content.content }} </pre>
+                                </div>
+                                <div class="plLength"> {{ content.read_time }}</div>
                             </div>
-                            <div id="content" style="display:None;">
-                                <pre> {{ content.content }} </pre>
-                            </div>
-                            <div class="plLength"> {{ content.read_time }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

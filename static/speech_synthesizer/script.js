@@ -206,7 +206,6 @@ function textChanged() {
 textChanged();
 
 
-
 /*
 * Finally we make sure to dequeue all utterances if the user leaves the site.
 * If we dont the buffered TTS Speech will continue even if the user presses the back button.
