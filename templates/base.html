@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: "#121012",
+              light: "#F6F8FB",
+              subtitle: "#45494E",
+              purple: "#633297",
+            },
+            fontFamily: {
+              sans: ["Helvetica Neue", "Arial", "Noto Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link href="{%  static  'css/index.css'  %}" rel="stylesheet" />
+    <title>{% block title %}BookAudifier{% endblock %}</title>
+  </head>
+  <body>
+    {% comment %} Navbar {% endcomment %}
+    <div
+      class="w-screen fixed z-50 top-0 backdrop-blur-xl bg-light/50"
+      x-data="{ open: false }"
+    >
+      <div
+        x-bind:class="!open ? 'menu w-screen h-screen flex flex-col justify-center items-center text-base font-semibold tracking-widest leading-none text-subtitle space-y-6 transition transition-all duration-500 ease-in-out fixed bg-light opacity-0 invisible' : 'menu w-screen h-screen flex flex-col justify-center items-center text-base font-semibold tracking-widest leading-none text-subtitle space-y-6 transition transition-all duration-500 ease-in-out fixed bg-light'"
+      >
+        <div class="font-bold text-dark">Trending</div>
+        <div>Top Rated</div>
+        <div>Genres</div>
+        <button class="h-10">
+          <div
+            class="flex items-center justify-center flex-1 h-full px-8 bg-purple shadow rounded-full text-white shadow-lg"
+          >
+            Login
+          </div>
+        </button>
+      </div>
+      <div
+        class="container mx-auto flex items-center justify-between px-8 pt-8 pb-4"
+      >
+        <button
+          class="text-gray-500 w-10 h-10 relative focus:outline-none md:hidden"
+          @click="open = !open"
+        >
+          <div
+            class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
+            <span
+              aria-hidden="true"
+              x-bind:class="! open ? '-translate-y-1.5 block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out': 'block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out rotate-45' "
+            ></span>
+            <span
+              aria-hidden="true"
+              x-bind:class="! open ? 'block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out': 'block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out opacity-0' "
+            ></span>
+            <span
+              aria-hidden="true"
+              x-bind:class="! open ? 'translate-y-1.5 block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out': 'block absolute h-0.5 w-5 bg-dark transform transition duration-500 ease-in-out -rotate-45' "
+            ></span>
+          </div>
+        </button>
+        <div
+          class="flex items-center text-base font-semibold tracking-widest leading-none text-subtitle space-x-6"
+        >
+          <img
+            class="w-8 hidden md:block"
+            src="https://cdn.discordapp.com/attachments/765973145852575746/925460482108833842/unknown.png"
+            alt=""
+          />
+          <div class="font-bold text-dark hidden md:block fx-underline py-2">
+            Trending
+          </div>
+          <div class="hidden md:block fx-underline py-2">Top Rated</div>
+          <div class="hidden md:block fx-underline py-2">Genres</div>
+        </div>
+        <div class="h-10 flex space-x-4 text-subtitle ml-4">
+          {% comment %} <Searchbar /> {% endcomment %}
+          <div
+            class="hidden md:flex items-center justify-center flex-1 h-full px-8 font-semibold bg-purple rounded-full text-white shadow-lg hover:shadow-sm"
+          >
+            Login
+          </div>
+        </div>
+        <img
+          class="w-8 md:hidden ml-4"
+          src="{%  static  'logo_image.png'  %}"
+          alt=""
+        />
+      </div>
+    </div>
+    {% comment %} main content {% endcomment %}
+    <div class="content overflow-y-scroll h-screen">{% block content %}{% endblock %}</div>
+  </body>
+</html>
