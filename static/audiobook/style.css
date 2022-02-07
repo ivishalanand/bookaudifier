@@ -129,10 +129,15 @@ p a:visited {
 .book-and-toc {
     display: flex;
     padding-top: 2%;
+    font-family: 'Comfortaa', cursive;
+
+
 }
 
 .book-and-toc-mobile {
     display: inline-block;
+    font-family: 'Comfortaa', cursive;
+
 }
 
 .book-card .book-card__cover {
@@ -152,7 +157,6 @@ p a:visited {
 
 .heading {
     text-align: center;
-    padding-bottom: 30px;
     font-family: 'Comfortaa', cursive;
     font-weight: 700;
     font-size: 30px;
@@ -212,6 +216,7 @@ pre {
 
 .book-info {
     width:70%;
+    font-family: 'Comfortaa', cursive;
 }
 
 .contents {
@@ -219,9 +224,18 @@ pre {
     font-size: 20px;
     font-family: 'Comfortaa', cursive;
 
-    font-weight: 600;
+    font-weight: 900;
     }
 
 .author {
-    padding-left: 10%;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 900;
+    font-size: 20px;
+    }
+
+.total-reading-time {
+    font-family: 'Comfortaa', cursive;
+    font-weight: 900;
+    font-size: 20px;
 }

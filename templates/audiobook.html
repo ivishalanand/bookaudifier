@@ -66,16 +66,21 @@
         </div>
         <div class="book-info">
             <div class="heading">
-                <div class="" style="font-weight: 700;">
-                    <b> {{book_title}} </b>
+                <div style="font-family: 'Comfortaa', cursive;
+                            font-weight: 900;
+                            font-size: 30px;">
+                    {{book_title}}
                 </div>
-                <div class="" style="pading-left: 10%"> {{ total_reading_time }}</div>
+                <div class="author">
+                    {{book_author}}
+                </div>
+                <div class="total-reading-time">
+                    {{ total_reading_time }}
+                </div>
             </div>
-            <div class="author">
-                <b> {{book_author}} </b>
-            </div>
+
             <div class="contents">
-                <b> Table of contents </b>
+                Table of contents
             </div>
             <div class="toc">
                 <div id="plwrap">
@@ -130,7 +135,7 @@
                     </div>
                 </div>
                 <div contenteditable="true" id="text">
-                    {{toc.2.content}}
+                    {{toc.0.content}}
                     <!--                hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello-->
                     <!--                Vishal is my name.-->
                 </div>
