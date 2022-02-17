@@ -1,0 +1,348 @@
+h1 {
+  max-width: 480px;
+  margin: 2rem auto;
+  font-size: 150%;
+}
+form {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+select {
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+}
+
+/* Some firefox range styling */
+input[type=range][orient=vertical] {
+  -moz-appearance: none;
+}
+input[type=range][orient=vertical]::-moz-range-thumb {
+  background-color: #fff;
+  height: 1rem;
+  width: .5rem;
+  border-color: #fff;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+input[type=range][orient=vertical]::-moz-range-track {
+  background-color: #fff;
+}
+
+.speecharg {
+  height: 2rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+}
+.speecharg label {
+  display: inline-block;
+  width: 20%;
+}
+.speecharg input, .speecharg select {
+  display: inline-block;
+  width: calc(80% - 3rem);
+  margin: 0;
+}
+.speecharg button {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 0 0 1.5rem;
+  display: inline-block;
+  padding: 0;
+}
+.bottom {
+  margin-top: 1rem;
+  margin: 1rem 0;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.bottom > * {
+}
+
+.bottom button.small {
+  height: 3.25rem;
+  width: 3.25rem;
+  padding: 0;
+}
+
+#textarea {
+ width: 100%;
+ height: 8rem;
+ display: block;
+ margin-bottom: 1rem;
+ border-radius: 5px;
+ position: relative;
+ background-color: #fff;
+ transition: background-color 100ms ease;
+ -webkit-transition: background-color 100ms ease;
+}
+
+.speaking #textarea {
+  background-color: #333;
+}
+
+#textarea > * {
+  position: absolute;
+  display: block;
+  border: none;
+  resize: none;
+  top: 0;
+  left: 0;
+  width: calc(100% - 1rem);
+  height: calc(100% - 1rem);
+  margin: .5rem;
+  padding: 0;
+  white-space: pre-wrap;
+  line-height: 1.1rem;
+  background-color: transparent;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+#textbeingspoken {
+  color: #aaa;
+  visibility: hidden;
+  opacity: 0;
+  overflow: auto;
+  transition: all 100ms ease;
+  -webkit-transition: all 100ms ease;
+}
+
+.speaking #textbeingspoken {
+  visibility: visible;
+  opacity: 1;
+}
+
+a#gh {
+  color: #333;
+  text-align: right;
+  display: block;
+  font-style: italic;
+}
+
+#marker {
+  position: absolute;
+  visibility: hidden;
+  border: 1px solid orange;
+}
+
+#marker.moved {
+  visibility: visible;
+}
+
+#marker.animate {
+  transition: all 50ms ease;
+  -webkit-transition: all 50ms ease;
+}
+
+button > img {
+  width: 100%;
+  height: auto;
+}
+
+.widebutton {
+  width: 9rem;
+}
+
+.widebutton > button {
+  display: block;
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+
+.audioplayer {
+  background: #ebe9ff;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  height: 15%;
+  border-radius: 1.5rem;
+}
+
+
+
+.seekbar {
+  margin: 12px 0;
+  padding: 10px 24px;
+  position: relative;
+}
+
+.seekbar-progress {
+  height: 10px;
+  background-color: #f5f5f5;
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%);
+  background-repeat: repeat-x;
+  border-radius: 6px;
+}
+
+.seekbar-progress [role="progressbar"] {
+  height: 100%;
+  position: relative;
+  background: #643297;
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+}
+
+.seekbar-progress [role="progressbar"]:after {
+  content: " ";
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -7px;
+  right: -12px;
+  background-color: #801ae9;
+  background-repeat: repeat-x;
+  border-radius: 20px;
+}
+
+.seekbar input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: transparent;
+  outline: 0;
+  border: 0;
+}
+
+.seekbar input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  display: block;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+}
+
+/*
+ Mozilla:
+ https://developer.mozilla.org/en-US/docs/User:Jonathan_Watt/range
+ */
+ .seekbar input[type="range"]::-moz-range-thumb {
+  display: block;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 0;
+}
+
+.seekbar input[type="range"]::-moz-range-track {
+  background: transparent;
+  border: 0;
+}
+
+.seekbar input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+.controls {
+  text-align: center;
+  height: 100%;
+}
+
+.inactive {
+  display: none;
+}
+
+.backward {
+  margin-right: 2.5rem;
+  cursor: pointer;
+
+}
+
+.play {
+  cursor: pointer;
+}
+
+.pause {
+  cursor: pointer;
+}
+
+.forward {
+  margin-left: 2.5rem;
+  cursor: pointer;
+
+}
+
+.speech {
+  margin-right: 0.5rem;
+}
+
+
+.voice-properties {
+  background-color: #643297;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  cursor: pointer;
+  padding: 0 .2rem;
+  border-radius: 2rem;
+  height: 20%;
+  width: 10%;
+}
+
+
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropup {
+  position: relative;
+  display: inline-block;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  bottom: 50px;
+  z-index: 1;
+}
+
+.dropup-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropup-content a:hover {background-color: #ccc}
+
+.dropup:hover .dropup-content {
+  display: block;
+}
+
+.dropup:hover .dropbtn {
+  background-color: #2980B9;
+}
+
+.rate-properties {
+  background-color: #643297;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 1.5rem;
+  cursor: pointer;
+  padding: 0 .3rem;
+  margin-left: 1.5rem;
+  border-radius: 2rem;
+  height: 20%;
+  width: 5%;
+}
