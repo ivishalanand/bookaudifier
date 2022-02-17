@@ -2,7 +2,9 @@
 {% load static %}
 <html lang="en">
 <head>
-    <title>bookaudifier</title>
+    <title>Bookaudifier</title>
+    <link href="{%  static  'favicon.ico'  %}" rel="icon" type="image/x-icon">
+
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -48,7 +50,7 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="searchbar">
                     <input class="search_input" name="search"
-                           placeholder="e.g. The Subtle Art of Not Giving a F*ck........"
+                           placeholder="e.g. Sapiens........"
                            type="text">
                     <a class="search_icon button" href="#" type="submit"><i class="fas fa-search"></i></a>
                     </input>
@@ -71,8 +73,8 @@
 
 <main>
     <div>
-        <div class="container-fluid justify-content-center mb-4">
-            <div class="row justify-content-center row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
+        <div class="container-fluid justify-content-center mb-6">
+            <div class="row justify-content-center row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
                 {% if books_data %}
                 {% for data in books_data %}
                 <form action="{% url 'generate_audiobook' %}" class="book-wrap" id='{{data.book_id}}'

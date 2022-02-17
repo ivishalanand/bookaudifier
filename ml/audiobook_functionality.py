@@ -113,19 +113,27 @@ def get_results(rows):
     return results
 
 
-def fetch_books(query):
-    query_modified = query.replace(" ", '+')
-    URL = "https://www.pdfdrive.com/search?q=" + query_modified
-
+def get_books(URL):
     headers = get_headers()
     resp = requests.get(URL, headers=headers)
 
     soup = BeautifulSoup(resp.text, "html.parser")
     rows = soup.findAll("div", {"class": "col-sm"})
     results = get_results(rows)
-    # results.set_index('title', inplace=True)
-    # results = results.T
-    return results  # .to_dict()
+    return results
+
+
+def fetch_books(query, homepage=False):
+    if homepage:
+        URL = "https://www.pdfdrive.com/category/112"
+    else:
+        query_modified = query.replace(" ", '+')
+        URL = "https://www.pdfdrive.com/search?q=" + query_modified
+
+    return get_books(URL)
+
+
+
 
 
 def get_download_link(download_soup):

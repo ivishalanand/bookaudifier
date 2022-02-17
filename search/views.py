@@ -5,8 +5,6 @@ import json
 import os
 from ml.audiobook_functionality import fetch_books, get_audiobook
 
-def index(request):
-    return render(request, 'index.html')
 
 def search(request):
     if request.method == 'POST':
@@ -33,6 +31,19 @@ def search(request):
         return render(request, 'search.html', context)
     else:
         return render(request, 'search.html')
+
+
+def index(request):
+    search_query = "startups"
+    df = fetch_books(search_query, homepage=True)
+    json_records = df.reset_index().to_json(orient='records')
+    data = json.loads(json_records)
+    context = {'books_data': data,
+               'query': search,
+               'current_pg_no': 0,
+               }
+    return render(request, 'index.html', context)
+
 
 
 def generate_audiobook(request):
