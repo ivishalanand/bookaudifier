@@ -58,7 +58,7 @@ def get_info(rows, i):
     except:
         hits = ''
     try:
-        book_id = rows[i].find('a').get('data-id')
+        book_id = rows[i].find('a').get('id').replace("cover-","")
     except:
         book_id = ''
 
