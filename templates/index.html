@@ -17,6 +17,7 @@ z-index: 100; /* Specify a stack order in case you're using a different order fo
 cursor: pointer; /* Add a pointer on hover */
 }
 
+
 </style>
 <div class="d-flex justify-content-center logo-name">
     <img alt="bookaudifier" height="30px" src="{% static 'logo_name.png' %}">
@@ -26,9 +27,10 @@ cursor: pointer; /* Add a pointer on hover */
     <h1 class="tagline"> READING IS HARD, LISTENING IS EASY!</h1>
 </div>
 
-<div class="d-flex justify-content-center">
-    <h5 class="sub-heading"> Turn any book into an Audiobook using AI. Even generate summary of any audiobook for
+<div class="d-flex justify-content-center" style="display: flex; flex-direction: column;">
+    <h5 class="sub-heading" style="MARGIN-BOTTOM: 0rem;"> Turn any book into an Audiobook using AI. Even generate audiobook summary for
         free.</h5>
+    <h5 class="sub-heading"> Search from a vast library of <span style="color:#643297;">75 million books!</span> </h5>
 </div>
 <div class="container">
     <form action="search" method="POST">
@@ -37,7 +39,7 @@ cursor: pointer; /* Add a pointer on hover */
             <div class="searchbar">
                 <input class="search_input" name="search" placeholder="e.g. Sapiens...."
                        type="text">
-                <a class="search_icon" href="#"><i class="fas fa-search"></i></a>
+                <a class="search_icon"><i class="fas fa-search"></i></a>
                 </input>
             </div>
         </div>
@@ -83,6 +85,7 @@ cursor: pointer; /* Add a pointer on hover */
     <div class="lds-dual-ring"></div>
 </div>
 
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src="{%  static  'audioplayer_assets/script.js'  %}"></script>
 <script>
@@ -90,5 +93,6 @@ function generateAudiobook(query) {
     document.getElementById(query).submit();
     document.querySelectorAll('.overlay')[0].style.display ="flex"
 }
+
 </script>
 {% endblock %}
