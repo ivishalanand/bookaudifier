@@ -12,4 +12,3 @@ summarizer==0.0.7
 pymupdf==1.18.14
 django_heroku
 gunicorn
-googleclone
