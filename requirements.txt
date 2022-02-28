@@ -10,3 +10,5 @@ readtime==1.1.1
 requests==2.25.1
 summarizer==0.0.7
 pymupdf==1.18.14
+django_heroku
+gunicorn

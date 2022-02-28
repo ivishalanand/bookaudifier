@@ -10,14 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
 from pathlib import Path
 import os
-# import django_heroku
+import django_heroku
+
 # import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -29,7 +30,6 @@ SECRET_KEY = '49b*7v!@zvyhrw6m(nndrzbi^uo98r_!9)xwn&68#y$=y-ksb4'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -73,17 +73,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bookaudifier.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8khakvg933pq6',
+        'USER': 'dwypweehodtnik',
+        'PASSWORD': '94c47d4d78a51ba7238e7fcb7bc7e620227daff683489f0b22fc42819a290caa',
+        'HOST': 'ec2-54-156-110-139.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -103,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -117,19 +124,24 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
 
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, "static"),
 '/var/www/static/',
 ]
-
-
+#
+#
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
