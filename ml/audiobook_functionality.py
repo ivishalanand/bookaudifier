@@ -16,6 +16,7 @@ from requests import get
 from io import BytesIO
 from PIL import Image
 
+
 HOME_DIR = os.getcwd()
 
 
@@ -58,7 +59,7 @@ def get_info(rows, i):
     except:
         hits = ''
     try:
-        book_id = rows[i].find('a').get('id').replace("cover-","")
+        book_id = rows[i].find('a').get('data-id')
     except:
         book_id = ''
 
@@ -119,11 +120,7 @@ def get_books(URL):
     soup = BeautifulSoup(resp.text, "html.parser")
     rows = soup.findAll("div", {"class": "col-sm"})
     results = get_results(rows)
-    try:
-        search_result_stats = soup.findAll("div", {"id": "result-found"})[0].text.replace("\n", "")
-    except:
-        search_result_stats = ""
-    return results, search_result_stats
+    return results
 
 
 def fetch_books(query, homepage=False):
@@ -134,6 +131,9 @@ def fetch_books(query, homepage=False):
         URL = "https://www.pdfdrive.com/search?q=" + query_modified
 
     return get_books(URL)
+
+
+
 
 
 def get_download_link(download_soup):
@@ -206,7 +206,7 @@ def get_text_between_pags(page_start, page_end, doc):
     text = ""
     for page in range(page_start, page_end):
         text = text + doc.load_page(page).get_text()
-    cleaned_text = unicodedata.normalize("NFKD", text)
+    cleaned_text = unicodedata.normalize("NFKD",text)
     return cleaned_text
 
 
@@ -226,7 +226,7 @@ def get_book_data(my_raw_data):
     text = ""
     total_reading_time = ""
     for info in toc:
-        level = "  " * (info[0] - 1)
+        level = "  "*(info[0]-1)
         read_time_int = readtime.of_text(info[4]).minutes
         read_time_str = str(read_time_int) + " min"
         book_data.append(TOC(info[1], info[4], level, read_time_str))
@@ -234,7 +234,7 @@ def get_book_data(my_raw_data):
 
     total_time_to_read = readtime.of_text(text).minutes
     if total_time_to_read > 60:
-        total_reading_time = "{:.2f}".format(total_time_to_read / 60) + " hour"
+        total_reading_time = "{:.2f}".format(total_time_to_read/60) + " hour"
     else:
         total_reading_time = str(total_time_to_read) + " mins"
     # print("total readin time :", total_reading_time)

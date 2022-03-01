@@ -4,20 +4,23 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid" style="padding-left:2.5%; padding-right:2.5%;">
                 <a class="navbar-brand" href="#">
-                    <img alt="bookaudifier" height="60px" href="{% url 'index' %}" src="{% static 'logo_image.png' %}">
+                    <img alt="bookaudifier" height="60px" href="" src="{% static 'logo_image.png' %}">
                 </a>
                 <button class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link text-center active" href="{% url 'index' %}" >Home</a>
+                        <a class="nav-item nav-link text-center active" href="#">Home</a>
                         <a class="nav-item nav-link text-center" href="#">Dashboard</a>
                         <a class="nav-item nav-link text-center" href="#">My Bookshelf</a>
                     </div>
                     <div class="ms-auto navbar-nav">
                         <a href="{% url 'login' %}">
                             <button class="login rounded-pill">Login</button>
+                        </a>
+                        <a href="{% url 'register' %}">
+                            <button class="signup rounded-pill">Signup</button>
                         </a>
                     </div>
                 </div>
