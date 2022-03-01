@@ -120,7 +120,11 @@ def get_books(URL):
     soup = BeautifulSoup(resp.text, "html.parser")
     rows = soup.findAll("div", {"class": "col-sm"})
     results = get_results(rows)
-    return results
+    try:
+        search_result_stats = soup.findAll("div", {"id": "result-found"})[0].text.replace("\n", "")
+    except:
+        search_result_stats = ""
+    return results, search_result_stats
 
 
 def fetch_books(query, homepage=False):

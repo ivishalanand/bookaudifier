@@ -21,12 +21,13 @@ def search(request):
             search_query = search
             current_pg_no = 1
 
-        df = fetch_books(search_query)
+        df, search_result_stats  = fetch_books(search_query)
         json_records = df.reset_index().to_json(orient='records')
         data = json.loads(json_records)
         context = {'books_data': data,
                    'query': search,
                    'current_pg_no': current_pg_no,
+                   'search_result_stats': search_result_stats,
                    }
         return render(request, 'search.html', context)
     else:
@@ -35,7 +36,7 @@ def search(request):
 
 def index(request):
     search_query = "startups"
-    df = fetch_books(search_query, homepage=True)
+    df, _ = fetch_books(search_query, homepage=True)
     json_records = df.reset_index().to_json(orient='records')
     data = json.loads(json_records)
     context = {'books_data': data,
