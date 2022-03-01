@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn bookaudifier.wsgi
+web gunicorn googleclone.wsgi:application --log-file -

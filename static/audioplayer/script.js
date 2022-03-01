@@ -41,7 +41,7 @@ function populateVoiceList() {
       var option = document.createElement('option');
       option.innerHTML = voices[i].name;
       // selecting default nice voice
-      if (voices[i].name == "Fiona") {
+      if (voices[i].name == "Alex") {
         option.setAttribute('selected', true);
       }
       option.setAttribute('value', voices[i].voiceURI);
