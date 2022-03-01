@@ -53,4 +53,7 @@ def generate_audiobook(request):
                'total_reading_time': total_reading_time,
                'book_title': book_title,
                'book_author': book_author}
+    if len(book_data) == 0:
+        return render(request, 'aww_snap.html', context)
+
     return render(request, 'audiobook.html', context)
