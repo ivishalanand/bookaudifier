@@ -21,13 +21,12 @@ def search(request):
             search_query = search
             current_pg_no = 1
 
-        df, search_result_stats = fetch_books(search_query)
+        df = fetch_books(search_query)
         json_records = df.reset_index().to_json(orient='records')
         data = json.loads(json_records)
         context = {'books_data': data,
                    'query': search,
                    'current_pg_no': current_pg_no,
-                   'search_result_stats': search_result_stats,
                    }
         return render(request, 'search.html', context)
     else:
@@ -36,7 +35,7 @@ def search(request):
 
 def index(request):
     search_query = "startups"
-    df, _ = fetch_books(search_query, homepage=True)
+    df = fetch_books(search_query, homepage=True)
     json_records = df.reset_index().to_json(orient='records')
     data = json.loads(json_records)
     context = {'books_data': data,
@@ -54,7 +53,4 @@ def generate_audiobook(request):
                'total_reading_time': total_reading_time,
                'book_title': book_title,
                'book_author': book_author}
-    if len(book_data) == 0:
-        return render(request, 'aww_snap.html', context)
-
     return render(request, 'audiobook.html', context)
