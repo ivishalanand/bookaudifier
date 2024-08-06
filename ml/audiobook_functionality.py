@@ -94,23 +94,25 @@ def no_cover_available_update(row):
     return img_link
 
 
+
 def get_results(rows):
     results = pd.DataFrame(columns=['title', 'pdf_link', 'img_link', 'year', 'page_count', 'size', 'hits', 'book_id'])
 
     for i in range(len(rows)):
         pdf_link, img_link, title, year, page_count, size, hits, book_id = get_info(rows, i)
-        data = {'title': title,
-                'pdf_link': pdf_link,
-                'img_link': img_link,
-                'year': year,
-                'page_count': page_count,
-                'size': size,
-                'hits': hits,
-                'book_id': book_id}
-        results = results.append(data, ignore_index=True)
+        data = pd.DataFrame([{
+            'title': title,
+            'pdf_link': pdf_link,
+            'img_link': img_link,
+            'year': year,
+            'page_count': page_count,
+            'size': size,
+            'hits': hits,
+            'book_id': book_id
+        }])
+        results = pd.concat([results, data], ignore_index=True)
         # results['img_link'] = results.apply(lambda x: no_cover_available_update(x), axis=1)
     return results
-
 
 def get_books(URL):
     headers = get_headers()
