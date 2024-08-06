@@ -4,3 +4,4 @@ static/audiobook.mp3
 audiobook_assets/book.pdf
 audiobook_assets/book_content.txt
 .idea
+__pycache__/
